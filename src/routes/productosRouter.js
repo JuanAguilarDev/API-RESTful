@@ -1,13 +1,6 @@
 const productosController = require('../controllers/productosController');
-
-const express = require("express");
-const bodyParser = require("body-parser");
-const router = express.Router();
-const app = express();
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
+const {Router} = require('express');
+const router = Router();
 
 function handlerError(res, code){
   res.statusCode = code;
@@ -50,16 +43,15 @@ router.get("/:idProducto", (req, res) => {
 router.post("/", (req, res) => {
   try {
     let detallesProducto = {};
-    req
-    .on('data', (chunk) =>{
-      detallesProducto = JSON.parse(chunk.toString());
-      productosController.guardarDetallesProducto(detallesProducto, (err, result)=>{
-        if(err){
-          return handlerError(res, 500);
-        }
-        res.status(201).send(result);
-      })
-    })
+    console.log(req.body);
+    detallesProducto = req.body;
+    productosController.guardarDetallesProducto(detallesProducto, (err, result)=>{
+      if(err){
+        return handlerError(res, 500);
+      }
+      res.status(201).send(result);
+    });
+    
   } catch (err) {
       return handlerError(res, 400);
   }

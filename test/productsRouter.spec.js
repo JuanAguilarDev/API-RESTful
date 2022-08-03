@@ -51,10 +51,10 @@ describe("Probando API Productos", function () {
       .expect(201)
       .end((err, res) => {
         expect(err).to.be.equal(null);
-        expect(res.body).to.be.an("array");
+        expect(res.body).to.be.an("object");
         expect(res.status).to.equal(201);
-        expect(res.body[0].nombre).to.equal(nuevoProducto.nombre);
-        expect(res.body[0].price).to.be.equal(nuevoProducto.precio);
+        expect(res.body.nombre).to.equal(nuevoProducto.nombre);
+        expect(res.body.precio).to.be.equal(nuevoProducto.precio);
         done(err);
       });
   });

@@ -5,9 +5,6 @@ const config = require("./config");
 const app = express();
 const productosRouter = require("./src/routes/productosRouter");
 
-
-
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
