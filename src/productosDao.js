@@ -28,7 +28,7 @@ const getProductos = function(done){
     try{
       return done(undefined, productos);
     }catch(err){
-      throw new Error(err);
+      return done(err);
     }
   }
   throw new Error('Los productos no fueron encontrados')
@@ -45,7 +45,7 @@ const getProductoPorId = function(idProducto, done){
     try{
       return done(undefined, producto);
     }catch(err){
-      throw new Error(err)
+      return done(err);
     }
   }
   throw new Error(`El producto con el id: ${idProducto}, no fue encontrado.`);    
@@ -68,7 +68,7 @@ const guardarDetallesProducto = function (detallesProducto, done) {
       fs.writeFileSync(path, JSON.stringify(productos)); 
       return done(undefined, productos);
     }catch(err){
-      throw new Error(err);
+      return done(err);
     }
     
   }
@@ -88,7 +88,7 @@ const guardarDetallesProducto = function (detallesProducto, done) {
         fs.writeFileSync(path, JSON.stringify(data));
         return done(undefined, data);
       } catch(err){
-        throw new Error(err);
+        return done(err);
       }
     }
   }

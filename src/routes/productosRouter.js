@@ -32,7 +32,7 @@ router.get("/:idProducto", (req, res) => {
       if(err){
         return handlerError(res, 500);
       }
-        res.status(200).send(result);
+        res.status(200).send({status:"OK", data: result});
       });
   } catch (err) {
     return handlerError(res, 400);
@@ -51,7 +51,7 @@ router.post("/", (req, res) => {
         if(err){
           return handlerError(res, 500);
         }
-        res.status(200).send(result);
+        res.status(201).send(result);
       })
     })
   } catch (err) {

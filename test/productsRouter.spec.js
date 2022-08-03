@@ -11,8 +11,8 @@ describe("Probando API Productos", function () {
       .end((err, res) => {
         expect(err).to.be.equal(null);
         expect(err).to.equal(null);
-        expect(res.body).to.be.an("object");
-        expect(res.body.STATUS).to.equal("OK");
+        expect(res.body).to.be.an("array");
+        expect(res.body.STATUS).to.be.equal('OK');
         expect(res.body.data[0].nombre).to.be.equal("Monitor LED ");
          expect(res.body.data[1].nombre).to.be.equal("Refri");
          expect(res.body.data[2].nombre).to.be.equal("Mouse Optico");
@@ -26,7 +26,7 @@ describe("Probando API Productos", function () {
       .get("/api/v1/productos/3")
       .expect(200)
       .end((err, res) => {
-        expect(res.body).to.be.an("object");
+        expect(res.body).to.be.an("array");
         expect(res.body.STATUS).to.equal("OK");
         expect(res.body.data.id).to.be.equal(3);
         expect(res.body.data.nombre).to.be.equal("Mouse Optico");
