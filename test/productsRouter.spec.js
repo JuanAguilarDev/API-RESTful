@@ -12,11 +12,11 @@ describe("Probando API Productos", function () {
         expect(err).to.be.equal(null);
         expect(err).to.equal(null);
         expect(res.body).to.be.an("array");
-        expect(res.body.STATUS).to.be.equal('OK');
-        expect(res.body.data[0].nombre).to.be.equal("Monitor LED ");
-         expect(res.body.data[1].nombre).to.be.equal("Refri");
-         expect(res.body.data[2].nombre).to.be.equal("Mouse Optico");
-         expect(res.body.data[3].nombre).to.be.equal("Teclado Inalambrico");
+        expect(res.status).to.equal(200);
+        expect(res.body[0].nombre).to.equal("Monitor LED");
+         expect(res.body[1].nombre).to.be.equal("Refri");
+         expect(res.body[2].nombre).to.be.equal("Mouse Optico");
+         expect(res.body[3].nombre).to.be.equal("Teclado Inalambrico");
         done(err);
       });
   });
@@ -27,22 +27,22 @@ describe("Probando API Productos", function () {
       .expect(200)
       .end((err, res) => {
         expect(res.body).to.be.an("array");
-        expect(res.body.STATUS).to.equal("OK");
-        expect(res.body.data.id).to.be.equal(3);
-        expect(res.body.data.nombre).to.be.equal("Mouse Optico");
-        expect(res.body.data.precio).to.be.equal(25);
-        expect(res.body.data.cantidad).to.be.equal(1);
+        expect(res.status).to.equal(200);
+        expect(res.body[0].id).to.be.equal(3);
+        expect(res.body[0].nombre).to.be.equal("Mouse Optico");
+        expect(res.body[0].precio).to.be.equal(25);
+        expect(res.body[0].cantidad).to.be.equal(1);
         done(err);
       });
   });
 
 
-  it("Probando API guardar producto", function (done) {
+  it("Probando API guardar producto", function(done) {
     let nuevoProducto = {
-    "nombre": "Lavadora",
-      "descripcion": "Para lavar ropa",
-      "precio": 10000,
-      "cantidad": 10
+      nombre: "Lavadora",
+      descripcion: "Para lavar ropa",
+      precio: 10000,
+      cantidad: 10
     }
 
     supertest(app)
@@ -50,11 +50,11 @@ describe("Probando API Productos", function () {
       .send(nuevoProducto)
       .expect(201)
       .end((err, res) => {
-        expect(err).to.equal(null);
-        expect(res.body).to.be.an("object");
-        expect(res.body.STATUS).to.equal("OK");
-        expect(res.body.data.nombre).to.equal(nuevoProducto.nombre);
-        expect(res.body.data.price).to.be.equal(nuevoProducto.precio);
+        expect(err).to.be.equal(null);
+        expect(res.body).to.be.an("array");
+        expect(res.status).to.equal(201);
+        expect(res.body[0].nombre).to.equal(nuevoProducto.nombre);
+        expect(res.body[0].price).to.be.equal(nuevoProducto.precio);
         done(err);
       });
   });

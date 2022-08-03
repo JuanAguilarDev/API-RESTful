@@ -1,5 +1,12 @@
-const router = require('express').Router();
 const productosController = require('../controllers/productosController');
+
+const express = require("express");
+const bodyParser = require("body-parser");
+const router = express.Router();
+const app = express();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 
 function handlerError(res, code){
@@ -14,7 +21,7 @@ router.get("/", (req, res) => {
         return handlerError(res, 500);
       }
       res.status(200).send(results);
-
+      
     });
     
   } catch (err) {
@@ -27,12 +34,11 @@ router.get("/:idProducto", (req, res) => {
   try {
     // obtener el idproducto desde el req.params
     const {idProducto} = req.params; 
-    console.log(idProducto);
       productosController.getProductoPorId(idProducto, (err, result)=>{
       if(err){
         return handlerError(res, 500);
       }
-        res.status(200).send({status:"OK", data: result});
+        res.status(200).send(result);
       });
   } catch (err) {
     return handlerError(res, 400);

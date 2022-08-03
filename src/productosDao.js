@@ -66,7 +66,7 @@ const guardarDetallesProducto = function (detallesProducto, done) {
     try{
       productos.push(productoNuevo); 
       fs.writeFileSync(path, JSON.stringify(productos)); 
-      return done(undefined, productos);
+      return done(undefined, productoNuevo);
     }catch(err){
       return done(err);
     }
